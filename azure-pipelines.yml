@@ -55,10 +55,10 @@ stages:
 
           - script: pytest test/contract_test --disable-warnings -v
             displayName: "Run Contract Tests"
-            
+
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
-    dependsOn: Test
+    dependsOn: Tests
     condition: succeeded()
     jobs:
     - job: BuildAndPushJob
