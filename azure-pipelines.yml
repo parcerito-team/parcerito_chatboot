@@ -50,8 +50,8 @@ stages:
         steps:
           - task: UsePythonVersion@0
             inputs:
-            versionSpec: $(PYTHON_VERSION)
-            addToPath: true
+              versionSpec: $(PYTHON_VERSION)
+              addToPath: true
 
           - script: pytest test/contract_test --disable-warnings -v
             displayName: "Run Contract Tests"
