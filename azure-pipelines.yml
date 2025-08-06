@@ -25,7 +25,7 @@ stages:
         steps:
           - task: UsePythonVersion@0
             inputs:
-              versionSpec: '$(PYTHON_VERSION)'
+              versionSpec: $(PYTHON_VERSION)
               addToPath: true
           - script: |
                python -m pip install --upgrade pip
@@ -38,7 +38,7 @@ stages:
         steps:
           - task: UsePythonVersion@0
             inputs:
-              versionSpec: '$(PYTHON_VERSION)'
+              versionSpec: $(PYTHON_VERSION)
               addToPath: true
 
           - script: pytest test/unit_test --disable-warnings -v
@@ -50,12 +50,12 @@ stages:
         steps:
           - task: UsePythonVersion@0
             inputs:
-            versionSpec: '$(PYTHON_VERSION)'
+            versionSpec: $(PYTHON_VERSION)
             addToPath: true
 
           - script: pytest test/contract_test --disable-warnings -v
             displayName: "Run Contract Tests"
-
+            
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
     dependsOn: Test
