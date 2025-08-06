@@ -8,6 +8,8 @@
 
 pool:
   vmImage: 'ubuntu-latest'
+name: Default
+
 
 variables:
   PYTHON_VERSION: '3.10'
@@ -15,43 +17,42 @@ variables:
   IMAGE_NAME: parcerito-app
 
 stages:
-  - stage: Test
+  - stage: Tests
     displayName: Run Pytest
     jobs:
-      - job: instalar_dependencias
+      - job: InstallDependencies
         displayName: "Dependencies"
         steps:
-        - task: UsePythonVersion@0
-          inputs:
-          versionSpec: '$(PYTHON_VERSION)'
-          addToPath: true
-        - script: python -m pip install --upgrade pip
-          displayName: "update pip"
-    
-        - script: pip install -r requirements.txt
-          displayName: "Project Dependencies"
-  
-      - job: unit_tests
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '$(PYTHON_VERSION)'
+              addToPath: true
+          - script: |
+               python -m pip install --upgrade pip
+               pip install -r requirements.txt
+            displayName: "Project Dependencies and update pip"
+
+      - job: UnitTest
         displayName: "Unit Test"
-        dependsOn: instalar_dependencias
+        dependsOn: InstallDependencies
         steps:
           - task: UsePythonVersion@0
             inputs:
-            versionSpec: '$(PYTHON_VERSION)'
-            addToPath: true
-  
+              versionSpec: '$(PYTHON_VERSION)'
+              addToPath: true
+
           - script: pytest test/unit_test --disable-warnings -v
             displayName: "Run Unit Tests"
-  
-      - job: contract_tests
+
+      - job: ContractTests
         displayName: "Contract Tests"
-        dependsOn: unit_tests
+        dependsOn: UnitTest
         steps:
           - task: UsePythonVersion@0
             inputs:
             versionSpec: '$(PYTHON_VERSION)'
             addToPath: true
-  
+
           - script: pytest test/contract_test --disable-warnings -v
             displayName: "Run Contract Tests"
 
