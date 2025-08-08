@@ -18,9 +18,9 @@ variables:
 
 stages:
   - stage: Tests
-    displayName: Run Pytest
+    displayName: Run testing
     jobs:
-      - job: InstallDependencies
+      - job: Run unit, contract testing
         displayName: "Dependencies"
         steps:
           - task: UsePythonVersion@0
@@ -31,31 +31,9 @@ stages:
                python -m pip install --upgrade pip
                pip install -r requirements.txt
                pip install -r test_requirements.txt
-            displayName: "Project Dependencies and update pip"
-
-      - job: UnitTest
-        displayName: "Unit Test"
-        dependsOn: InstallDependencies
-        steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: $(PYTHON_VERSION)
-              addToPath: true
-
-          - script: pytest test/unit_test --disable-warnings -v
-            displayName: "Run Unit Tests"
-
-      - job: ContractTests
-        displayName: "Contract Tests"
-        dependsOn: UnitTest
-        steps:
-          - task: UsePythonVersion@0
-            inputs:
-              versionSpec: $(PYTHON_VERSION)
-              addToPath: true
-
-          - script: pytest test/contract_test --disable-warnings -v
-            displayName: "Run Contract Tests"
+               pytest test/unit_test --disable-warnings -v
+               pytest test/contract_test --disable-warnings -v
+            displayName: "Run unit, contract testing"
 
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
