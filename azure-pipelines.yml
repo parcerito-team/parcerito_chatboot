@@ -20,8 +20,8 @@ stages:
   - stage: Tests
     displayName: Run testing
     jobs:
-      - job: Run unit contract testing
-        displayName: "Dependencies"
+      - job: RunUnitContractTesting
+        displayName: "Run Unit Contract Testing"
         steps:
           - task: UsePythonVersion@0
             inputs:
@@ -33,7 +33,6 @@ stages:
                pip install -r test_requirements.txt
                pytest test/unit_test --disable-warnings -v
                pytest test/contract_test --disable-warnings -v
-            displayName: "Run unit contract testing"
 
   - stage: BuildAndPush
     displayName: Build and Push Docker Image
