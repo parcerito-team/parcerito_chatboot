@@ -70,6 +70,10 @@
 
 ---
 
+## 3. Run the UI:
+
+1. Open index.html in the web-app folder
+   
 ## Note
 
 It is crucial to have a PostgreSQL database named **PerficientTest** with:
