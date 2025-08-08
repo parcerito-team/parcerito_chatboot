@@ -6,6 +6,14 @@ from src.exception_handlers import register_exception_handlers
 from src.logging_config import configure_logging
 from src.database import Base, engine
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Cambia "*" por una lista de dominios seguros en producción
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 def create_app() -> FastAPI:
     """App factory for FastAPI application."""
     configure_logging()
