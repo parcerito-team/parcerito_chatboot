@@ -80,3 +80,25 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.branding {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 100px;
+  margin-bottom: 10px;
+}
+
+.title {
+  margin: 0;
+  font-size: 32px;
+  color: #1f57ea;
+}
+
+.tagline {
+  font-style: italic;
+  color: #555;
+  margin: 5px 0 20px;
+}

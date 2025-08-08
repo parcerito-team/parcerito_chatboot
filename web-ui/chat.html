@@ -5,6 +5,17 @@
   <title>Chat con Parcerito-bot</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f3f4f6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
     .chat-container {
       display: flex;
       flex-direction: column;
@@ -24,6 +35,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+    }
+
+    .chat-header img {
+      height: 32px;
+    }
+
+    .chat-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
     }
 
     .chat-messages {
@@ -79,17 +99,32 @@
       font-weight: bold;
       cursor: pointer;
     }
+
+    .branding {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .branding img {
+      height: 32px;
+    }
   </style>
 </head>
 <body>
   <div class="chat-container">
     <div class="chat-header">
-      <h3>Parcerito-bot</h3>
+      <div class="branding">
+        <img src="logo.png" alt="ParceroGo Logo" />
+        <h3>ParceroGo</h3>
+      </div>
       <button onclick="logout()" style="background: white; color: #2563eb; padding: 0.4rem 0.8rem; border: none; border-radius: 6px; cursor: pointer;">
         Cerrar sesión
       </button>
     </div>
+
     <div class="chat-messages" id="chat-messages"></div>
+
     <div class="chat-input">
       <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." />
       <button onclick="sendMessage()">Enviar</button>
